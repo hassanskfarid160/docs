@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<b:blog xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+  <b:include data='blog' name='all-head-content'/>
+  
+  <b:skin><![CDATA[
+    /* OxygenIN Blogger Theme Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fff;
+    }
+    
+    /* Header Styles */
+    .header {
+      background: linear-gradient(135deg, #ff6b35 0%, #2ecc71 100%);
+      padding: 1rem 0;
+      position: relative;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .search-container {
+      flex: 1;
+      max-width: 400px;
+      margin: 0 2rem;
+    }
+    
+    .search-input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: none;
+      border-radius: 25px;
+      font-size: 1rem;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    
+    .search-input:focus {
+      outline: 3px solid rgba(255,255,255,0.5);
+      background: white;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    
+    /* Navigation Styles */
+    .nav-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    
+    .nav-btn:hover {
+      background-color: rgba(255,255,255,0.1);
+    }
+    
+    .nav-btn:focus {
+      outline: 3px solid rgba(255,255,255,0.5);
+    }
+    
+    .nav-btn svg {
+      width: 24px;
+      height: 24px;
+    }
+    
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+    
+    .nav-menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    
+    .nav-menu a:hover,
+    .nav-menu a:focus {
+      background-color: rgba(255,255,255,0.2);
+      outline: none;
+    }
+    
+    .nav-menu a:focus {
+      outline: 3px solid rgba(255,255,255,0.5);
+    }
+    
+    /* Mobile Navigation Drawer */
+    .nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 998;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .nav-drawer {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 300px;
+      height: 100%;
+      background: linear-gradient(180deg, #ff6b35 0%, #2ecc71 100%);
+      z-index: 999;
+      transition: right 0.3s ease;
+      overflow-y: auto;
+    }
+    
+    .nav-drawer.active {
+      right: 0;
+    }
+    
+    .nav-drawer-header {
+      padding: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .nav-drawer-title {
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    
+    .nav-close {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    
+    .nav-close:hover {
+      background-color: rgba(255,255,255,0.1);
+    }
+    
+    .nav-close:focus {
+      outline: 3px solid rgba(255,255,255,0.5);
+    }
+    
+    .nav-close svg {
+      width: 20px;
+      height: 20px;
+    }
+    
+    .nav-drawer-menu {
+      list-style: none;
+      padding: 1rem 0;
+    }
+    
+    .nav-drawer-menu li {
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .nav-drawer-menu a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      padding: 1rem 1.5rem;
+      transition: background-color 0.3s ease;
+    }
+    
+    .nav-drawer-menu a:hover,
+    .nav-drawer-menu a:focus {
+      background-color: rgba(255,255,255,0.1);
+      outline: none;
+    }
+    
+    .nav-drawer-menu a:focus {
+      outline: 3px solid rgba(255,255,255,0.5);
+    }
+    
+    /* Main Content */
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+    
+    /* Footer */
+    .footer {
+      background-color: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 3rem;
+    }
+    
+    .footer p {
+      margin: 0;
+      opacity: 0.8;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 700px) {
+      .nav-btn {
+        display: block;
+      }
+      
+      .nav-menu {
+        display: none;
+      }
+      
+      .search-container {
+        margin: 1rem 0 0 0;
+        max-width: 100%;
+        order: 3;
+        flex-basis: 100%;
+      }
+      
+      .header-container {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .logo {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+    }
+    
+    /* Reduced Motion Support */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      
+      .nav-drawer {
+        transition: none;
+      }
+      
+      .nav-overlay {
+        transition: none;
+      }
+    }
+    
+    /* Focus Management */
+    .focus-trap {
+      outline: none;
+    }
+    
+    /* Hide elements when drawer is open */
+    body.drawer-open {
+      overflow: hidden;
+    }
+  ]]></b:skin>
+  
+  <body>
+    <!-- Header Section -->
+    <b:section class='header' id='header' maxwidgets='1' showaddelement='no'>
+      <b:widget id='Header1' locked='false' title='OxygenIN Header' type='Header'>
+        <b:widget-settings>
+          <b:widget-setting name='showDescription'>false</b:widget-setting>
+          <b:widget-setting name='showImage'>false</b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+          <div class='header-container'>
+            <a class='logo' expr:href='data:blog.homepageUrl'>OxygenIN</a>
+            
+            <div class='search-container'>
+              <input type='search' class='search-input' aria-label='Search blog posts' placeholder='Search Blog Posts...' />
+            </div>
+            
+            <button class='nav-btn' id='navBtn' aria-expanded='false' aria-controls='navDrawer' aria-label='Open navigation menu'>
+              <svg viewBox='0 0 24 24' fill='currentColor'>
+                <path d='M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z'/>
+              </svg>
+            </button>
+            
+            <nav class='nav-menu' id='navMenu'>
+              <a href='/' data-blog-url>Home</a>
+              <a href='/search/label/blog' data-blog-url>Blog</a>
+              <a href='/search/label/tools' data-blog-url>Tools</a>
+              <a href='/search/label/live-tv' data-blog-url>Live TV</a>
+              <a href='/p/about.html' data-blog-url>About</a>
+            </nav>
+          </div>
+        </b:includable>
+      </b:widget>
+    </b:section>
+    
+    <!-- Navigation Overlay -->
+    <div class='nav-overlay' id='navOverlay' aria-hidden='true'></div>
+    
+    <!-- Mobile Navigation Drawer -->
+    <div class='nav-drawer' id='navDrawer' aria-hidden='true'>
+      <div class='nav-drawer-header'>
+        <div class='nav-drawer-title'>Menu</div>
+        <button class='nav-close' id='navClose' aria-label='Close navigation menu'>
+          <svg viewBox='0 0 24 24' fill='currentColor'>
+            <path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/>
+          </svg>
+        </button>
+      </div>
+      <ul class='nav-drawer-menu'>
+        <li><a href='/' data-blog-url>Home</a></li>
+        <li><a href='/search/label/blog' data-blog-url>Blog</a></li>
+        <li><a href='/search/label/tools' data-blog-url>Tools</a></li>
+        <li><a href='/search/label/live-tv' data-blog-url>Live TV</a></li>
+        <li><a href='/p/about.html' data-blog-url>About</a></li>
+      </ul>
+    </div>
+    
+    <!-- Main Content Section -->
+    <b:section class='main-content' id='main' maxwidgets='1' showaddelement='yes'>
+      <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog'>
+        <b:widget-settings>
+          <b:widget-setting name='showDateHeader'>true</b:widget-setting>
+          <b:widget-setting name='style.textcolor'>#000000</b:widget-setting>
+          <b:widget-setting name='style.backgroundcolor'>#ffffff</b:widget-setting>
+          <b:widget-setting name='style.urlcolor'>#ff6b35</b:widget-setting>
+          <b:widget-setting name='style.linkcolor'>#2ecc71</b:widget-setting>
+          <b:widget-setting name='style.vlinkcolor'>#ff6b35</b:widget-setting>
+          <b:widget-setting name='showShareButtons'>true</b:widget-setting>
+          <b:widget-setting name='showBacklinks'>true</b:widget-setting>
+          <b:widget-setting name='showLabels'>true</b:widget-setting>
+          <b:widget-setting name='showLocation'>false</b:widget-setting>
+          <b:widget-setting name='showTimestamp'>true</b:widget-setting>
+          <b:widget-setting name='showAuthor'>true</b:widget-setting>
+          <b:widget-setting name='showReactions'>true</b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main' var='top'>
+          <b:if cond='data:title != &quot;&quot;'>
+            <h2><data:title/></h2>
+          </b:if>
+          
+          <div class='blog-posts hfeed'>
+            <b:include data='posts' name='posts'/>
+          </div>
+          
+          <b:include name='nextprev'/>
+        </b:includable>
+        
+        <b:includable id='nextprev'>
+          <b:if cond='data:blog.pageType == &quot;item&quot;'>
+            <b:if cond='data:blog.nextPageUrl'>
+              <a class='blog-pager-newer-link' expr:href='data:blog.nextPageUrl'>&amp;laquo; <data:blog.newerPageTitle/></a>
+            </b:if>
+            <b:if cond='data:blog.previousPageUrl'>
+              <a class='blog-pager-older-link' expr:href='data:blog.previousPageUrl'><data:blog.olderPageTitle/> &amp;raquo;</a>
+            </b:if>
+          </b:if>
+          <b:if cond='data:blog.pageType == &quot;archive&quot;'>
+            <b:if cond='data:blog.nextPageUrl'>
+              <a class='blog-pager-newer-link' expr:href='data:blog.nextPageUrl'>&amp;laquo; <data:blog.newerPageTitle/></a>
+            </b:if>
+            <b:if cond='data:blog.previousPageUrl'>
+              <a class='blog-pager-older-link' expr:href='data:blog.previousPageUrl'><data:blog.olderPageTitle/> &amp;raquo;</a>
+            </b:if>
+          </b:if>
+          <b:if cond='data:blog.pageType == &quot;index&quot;'>
+            <b:if cond='data:blog.nextPageUrl'>
+              <a class='blog-pager-older-link' expr:href='data:blog.nextPageUrl'><data:blog.olderPageTitle/> &amp;raquo;</a>
+            </b:if>
+            <b:if cond='data:blog.previousPageUrl'>
+              <a class='blog-pager-newer-link' expr:href='data:blog.previousPageUrl'>&amp;laquo; <data:blog.newerPageTitle/></a>
+            </b:if>
+          </b:if>
+        </b:includable>
+        
+        <b:includable id='posts' var='posts'>
+          <b:loop values='data:posts' var='post'>
+            <b:include data='post' name='post'/>
+          </b:loop>
+        </b:includable>
+        
+        <b:includable id='post' var='post'>
+          <article class='post hentry'>
+            <b:if cond='data:post.title'>
+              <h3 class='post-title entry-title'>
+                <b:if cond='data:post.link'>
+                  <a expr:href='data:post.link'><data:post.title/></a>
+                </b:if>
+                <b:if cond='data:post.url'>
+                  <b:if cond='data:blog.url != data:post.url'>
+                    <a expr:href='data:post.url'><data:post.title/></a>
+                  </b:if>
+                  <b:if cond='data:blog.url == data:post.url'>
+                    <data:post.title/>
+                  </b:if>
+                </b:if>
+              </h3>
+            </b:if>
+            
+            <div class='post-header'>
+              <b:if cond='data:post.dateHeader'>
+                <h2 class='date-header'><data:post.dateHeader/></h2>
+              </b:if>
+              
+              <div class='post-meta'>
+                <b:if cond='data:post.author'>
+                  <span class='post-author'>
+                    <data:post.author/>
+                  </span>
+                </b:if>
+                
+                <b:if cond='data:post.timestamp'>
+                  <span class='post-timestamp'>
+                    <data:post.timestamp/>
+                  </span>
+                </b:if>
+              </div>
+            </div>
+            
+            <div class='post-body entry-content'>
+              <data:post.body/>
+            </div>
+            
+            <div class='post-footer'>
+              <b:if cond='data:post.labels'>
+                <div class='post-labels'>
+                  <b:loop values='data:post.labels' var='label'>
+                    <a expr:href='data:label.url' rel='tag'><data:label.name/></a>
+                  </b:loop>
+                </div>
+              </b:if>
+              
+              <b:if cond='data:post.allowComments'>
+                <div class='post-comment-link'>
+                  <a expr:href='data:post.addCommentUrl' expr:onclick='data:post.addCommentOnclick'>
+                    <b:if cond='data:post.numComments == 0'>
+                      No comments
+                    </b:if>
+                    <b:if cond='data:post.numComments == 1'>
+                      1 comment
+                    </b:if>
+                    <b:if cond='data:post.numComments &gt; 1'>
+                      <data:post.numComments/> comments
+                    </b:if>
+                  </a>
+                </div>
+              </b:if>
+            </div>
+          </article>
+        </b:includable>
+      </b:widget>
+    </b:section>
+    
+    <!-- Footer Section -->
+    <b:section class='footer' id='footer' maxwidgets='1' showaddelement='no'>
+      <b:widget id='Footer1' locked='false' title='Footer' type='HTML'>
+        <b:widget-settings>
+          <b:widget-setting name='content'>&lt;p&gt;&amp;copy; 2024 OxygenIN. All rights reserved.&lt;/p&gt;</b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+          <data:content/>
+        </b:includable>
+      </b:widget>
+    </b:section>
+    
+    <!-- JavaScript -->
+    <script type='text/javascript'><![CDATA[
+      // OxygenIN Navigation Script
+      (function() {
+        'use strict';
+        
+        // Check for reduced motion preference
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        
+        // Get DOM elements
+        const navBtn = document.getElementById('navBtn');
+        const navDrawer = document.getElementById('navDrawer');
+        const navOverlay = document.getElementById('navOverlay');
+        const navClose = document.getElementById('navClose');
+        const body = document.body;
+        
+        // Focus management
+        let previousActiveElement = null;
+        const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+        
+        // Open drawer function
+        function openDrawer() {
+          navDrawer.classList.add('active');
+          navOverlay.classList.add('active');
+          navBtn.setAttribute('aria-expanded', 'true');
+          navDrawer.setAttribute('aria-hidden', 'false');
+          navOverlay.setAttribute('aria-hidden', 'false');
+          
+          // Store currently focused element
+          previousActiveElement = document.activeElement;
+          
+          // Prevent body scroll
+          body.classList.add('drawer-open');
+          
+          // Focus first focusable element in drawer
+          const firstFocusable = navDrawer.querySelector(focusableElements);
+          if (firstFocusable) {
+            firstFocusable.focus();
+          }
+          
+          // Trap focus within drawer
+          trapFocus(navDrawer);
+        }
+        
+        // Close drawer function
+        function closeDrawer() {
+          navDrawer.classList.remove('active');
+          navOverlay.classList.remove('active');
+          navBtn.setAttribute('aria-expanded', 'false');
+          navDrawer.setAttribute('aria-hidden', 'true');
+          navOverlay.setAttribute('aria-hidden', 'true');
+          
+          // Restore body scroll
+          body.classList.remove('drawer-open');
+          
+          // Restore focus to previous element
+          if (previousActiveElement) {
+            previousActiveElement.focus();
+            previousActiveElement = null;
+          }
+          
+          // Remove focus trap
+          removeFocusTrap();
+        }
+        
+        // Focus trap functionality
+        function trapFocus(element) {
+          const focusableElements = element.querySelectorAll(focusableElements);
+          const firstFocusable = focusableElements[0];
+          const lastFocusable = focusableElements[focusableElements.length - 1];
+          
+          function handleTabKey(e) {
+            if (e.key === 'Tab') {
+              if (e.shiftKey) {
+                if (document.activeElement === firstFocusable) {
+                  e.preventDefault();
+                  lastFocusable.focus();
+                }
+              } else {
+                if (document.activeElement === lastFocusable) {
+                  e.preventDefault();
+                  firstFocusable.focus();
+                }
+              }
+            }
+          }
+          
+          element.addEventListener('keydown', handleTabKey);
+          
+          // Store the handler for removal
+          element._focusTrapHandler = handleTabKey;
+        }
+        
+        // Remove focus trap
+        function removeFocusTrap() {
+          if (navDrawer._focusTrapHandler) {
+            navDrawer.removeEventListener('keydown', navDrawer._focusTrapHandler);
+            navDrawer._focusTrapHandler = null;
+          }
+        }
+        
+        // Event listeners
+        navBtn.addEventListener('click', openDrawer);
+        navClose.addEventListener('click', closeDrawer);
+        navOverlay.addEventListener('click', closeDrawer);
+        
+        // Close drawer on Escape key
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && navDrawer.classList.contains('active')) {
+            closeDrawer();
+          }
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+          if (window.innerWidth > 700 && navDrawer.classList.contains('active')) {
+            closeDrawer();
+          }
+        });
+        
+        // Update navigation links with blog URL
+        function updateNavLinks() {
+          const blogUrl = window.location.origin;
+          const navLinks = document.querySelectorAll('[data-blog-url]');
+          
+          navLinks.forEach(function(link) {
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('/')) {
+              link.setAttribute('href', blogUrl + href);
+            }
+          });
+        }
+        
+        // Initialize
+        updateNavLinks();
+        
+        // Handle Blogger's dynamic content loading
+        if (typeof _WidgetManager !== 'undefined') {
+          _WidgetManager._RegisterWidget('_NavWidget', function(widget) {
+            updateNavLinks();
+          });
+        }
+        
+      })();
+    ]]></script>
+  </body>
+</b:blog>
