@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "http://sandbox.mintlify.com"
+      "url": "https://sandbox.mintlify.com"
     }
   ],
   "security": [
@@ -73,8 +73,8 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "plant response",
+          "201": {
+            "description": "Plant created",
             "content": {
               "application/json": {
                 "schema": {
